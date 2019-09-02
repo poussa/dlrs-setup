@@ -1,0 +1,11 @@
+{
+	"model_config_list": [
+		{
+			"config": {
+				"name": "inception-resnet-v2-fp32",
+				"base_path": "/opt/ml/classification/inception-resnet/v2/FP32/",
+				"batch_size": "16"
+			}
+		}
+	]
+}
