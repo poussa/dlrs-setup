@@ -4,7 +4,7 @@
 			"config": {
 				"name": "resnet-50-v1-fp32",
 				"base_path": "/opt/ml/classification/resnet/v1/50/caffe/FP32",
-				"batch_size": "16"
+				"batch_size": "1"
 			}
 		},
 		{

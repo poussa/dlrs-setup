@@ -2,7 +2,7 @@ SRC_DIR="${SRC_DIR:-$HOME/src}"
 DLDT_SRC_DIR=$SRC_DIR/dldt
 OVMS_SRC_DIR=$SRC_DIR/OpenVINO-model-server
 OVMS_IMAGE_NAME="${OVMS_IMAGE_NAME:-intelaipg/openvino-model-server:latest}"
-OVMS_MODEL_NAME="${OVMS_MODEL_NAME:-inception-resnet-v2-fp32}"
+OVMS_MODEL_NAME="${OVMS_MODEL_NAME:-resnet-50-v1-fp32}"
 MODEL_ZOO_SRC_DIR=$SRC_DIR/open_model_zoo
 MODEL_DIR=/opt/models
 CACHE_DIR=/opt/cache
@@ -35,8 +35,9 @@ function ovms_setup() {
 }
 
 function ovms_start() {
+	docker kill ovms > /dev/null 2>&1
 	docker run --rm -d  \
-	--name ovms-1 \
+	--name ovms \
 	-v /opt/models/:/opt/ml:ro \
 	-p 9001:9001 -p 8001:8001 \
 	$OVMS_IMAGE_NAME \
@@ -44,8 +45,9 @@ function ovms_start() {
 }
 
 function ovms_start_with_config() {
+	docker kill ovms > /dev/null 2>&1
 	docker run --rm -d  \
-	--name ovms-2 \
+	--name ovms \
 	-v /opt/models/:/opt/ml:ro \
 	-p 9001:9001 -p 8001:8001 \
 	$OVMS_IMAGE_NAME \
@@ -55,10 +57,11 @@ function ovms_start_with_config() {
 function ovms_inference_resnet() {
 	cd $OVMS_SRC_DIR/example_client
 	python grpc_serving_client.py \
+	--model_name $OVMS_MODEL_NAME \
 	--grpc_port 9001 \
 	--images_numpy_path imgs.npy \
-	--input_name input \
-	--output_name resnet_v1_50/predictions/Reshape_1 \
+	--input_name data \
+	--output_name prob \
 	--transpose_input False \
 	--labels_numpy lbs.npy
   	cd -
