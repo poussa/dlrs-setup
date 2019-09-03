@@ -1,8 +1,8 @@
-SRC_DIR=$HOME/src
+SRC_DIR="${SRC_DIR:-$HOME/src}"
 DLDT_SRC_DIR=$SRC_DIR/dldt
 OVMS_SRC_DIR=$SRC_DIR/OpenVINO-model-server
-OVMS_IMAGE_NAME=intelaipg/openvino-model-server:latest
-OVMS_MODEL_NAME=inception-resnet-v2-fp32
+OVMS_IMAGE_NAME="${OVMS_IMAGE_NAME:-intelaipg/openvino-model-server:latest}"
+OVMS_MODEL_NAME="${OVMS_MODEL_NAME:-inception-resnet-v2-fp32}"
 MODEL_ZOO_SRC_DIR=$SRC_DIR/open_model_zoo
 MODEL_DIR=/opt/models
 CACHE_DIR=/opt/cache
@@ -26,6 +26,10 @@ function ovms_setup() {
 	cd $SRC_DIR
 	git clone https://github.com/IntelAI/OpenVINO-model-server.git
 	git clone https://github.com/opencv/open_model_zoo.git
+	git clone https://github.com/opencv/dldt.git
+	pip install -r OpenVINO-model-server/requirements.txt
+	pip install -r open_model_zoo/tools/downloader/requirements.in
+	pip install -r dldt/model-optimizer/requirements_tf.txt
 	cd -
 	docker pull $OVMS_IMAGE_NAME
 }

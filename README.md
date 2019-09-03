@@ -1,9 +1,17 @@
 # dlrs-setup
-Deep Learning Reference Stack configurations and deployments
+
+OpenVINO model server and Deep Learning Reference Stack configurations and deployments
 
 ## Initalize environment
 
 ```bash
+source ./env.sh
+```
+
+Assumes your source directory (git clone destination) is `$HOME/src`. If now, use the following.
+
+```bash
+export SRC_DIR=<path-to-src-dir>
 source ./env.sh
 ```
 
@@ -42,6 +50,11 @@ Multiple models
 ovms_start_with_config
 ```
 
+Custom image
+
+```bash
+OVMS_IMAGE_NAME=ie-serving-py ovms_start_with_config
+```
 
 ## Deep Learning Reference Stack setup
 
