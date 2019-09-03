@@ -56,6 +56,20 @@ Custom image
 OVMS_IMAGE_NAME=ie-serving-py ovms_start_with_config
 ```
 
+### Get model info
+
+Get the model's input and output tensor names and shapes.
+
+```bash
+ovms_model_info
+```
+
+### Run Infrence
+
+```bash
+ovms_inference
+```
+
 ## Deep Learning Reference Stack setup
 
 TBD
