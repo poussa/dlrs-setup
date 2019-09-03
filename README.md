@@ -8,7 +8,7 @@ OpenVINO model server and Deep Learning Reference Stack configurations and deplo
 source ./env.sh
 ```
 
-Assumes your source directory (git clone destination) is `$HOME/src`. If now, use the following.
+Assumes your source directory (git clone destination) is `$HOME/src`. If not, use the following.
 
 ```bash
 export SRC_DIR=<path-to-src-dir>
